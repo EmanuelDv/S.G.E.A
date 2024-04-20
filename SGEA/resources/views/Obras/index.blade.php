@@ -36,7 +36,22 @@
                    <td>{{ $obra->tecnica }}</td>
                    <td>{{ $obra->dimensiones }}</td>
                    <td>{{ $obra->descripcion }}</td>
-                   <td><span>Action</span></td>
+                   <td>
+
+                   <a href="{{route('obras.edit',['obra' => $obra->id])}}"
+                    class="btn btn-info">Edit</a>
+
+                    <form action="{{route('obra.destroy',['obra' => $obra->id])}}"
+                    method="POST" style="display:inline-block">
+                    @method('delete')
+                    @csrf
+                     <input class="btn btn-danger" type="submit" value="Delete">
+
+                    </form>
+                
+                </td>
+
+
                </tr>
                @endforeach
            </tbody>
