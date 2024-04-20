@@ -73,7 +73,7 @@ class ObrasdeArteController extends Controller
         $artistas = DB::table('artistas')
         ->orderBy('id') 
         ->get();
-    return view('obras.edit', ['obras' => $obra,'artistas =>$artistast']);
+    return view('obras.edit', ['obras' => $obra,'artistas' =>$artistas]);
 
     }
 
@@ -87,7 +87,7 @@ class ObrasdeArteController extends Controller
         if ($request->code !== null) {
             $obra->id = $request->code;
         }
-        $obra->artista_id = $request->artista_id; 
+        $obra->artista_id = $request->code; 
         $obra->titulo = $request->titulo; 
         $obra->ano = $request->ano; 
         $obra->tecnica = $request->tecnica; 
