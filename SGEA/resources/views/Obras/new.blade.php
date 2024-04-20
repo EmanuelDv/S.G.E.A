@@ -17,11 +17,14 @@
             <input type="text" class="form-control" id="code" name="code" aria-describedby="id" disabled="disabled">
             <div id="idHelp" class="form-text">codigo exposicion</div>
         </div>
-        <div class="mb-3">
-            <label for="artista_id" class="form-label">artista_id</label>
-            <input type="text" class="form-control" id="artista_id" name="artista_id" ">
-        </div>
-        <div class="mb-3">
+        <label for="municipaly">Artistas</label>
+                            <select class="form-select" id="municipality" name="code" required>
+                                <option selected disabled value="">Choose one...</option>
+                                @foreach($artistas as $artista)
+                                    <option value="{{$artista->id}}">{{$artista->nombre}}</option>
+                                @endforeach
+                            </select>
+        <div class="mb-3">  
             <label for="titulo" class="form-label">titulo</label>
             <input type="text" class="form-control" id="titulo" name="titulo">
         </div>
@@ -38,8 +41,8 @@
             <input type="text" class="form-control" id="dimensiones" name="dimensiones">
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">description</label>
-            <input type="text" class="form-control" id="description" name="description">
+            <label for="descripcion" class="form-label">descripcion</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="{{route('obras.index')}}" class="btn btn-warning">Cancel</a>

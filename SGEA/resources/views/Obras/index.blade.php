@@ -16,7 +16,7 @@
            <thead>
                <tr>
                    <th scope="col">id</th>
-                   <th scope="col">artista_id	</th>
+                   <th scope="col">artista	</th>
                    <th scope="col">titulo</th>
                    <th scope="col">ano</th>
                    <th scope="col">tecnica</th>
@@ -28,8 +28,9 @@
            <tbody>
                @foreach ($obras as $obra)
                <tr>
+                
                    <th scope="row">{{ $obra->id }}</th>
-                   <td>{{ $obra->artista_id }}</td>
+                   <td>{{ $obra->nombre }}</td>
                    <td>{{ $obra->titulo }}</td>
                    <td>{{ $obra->ano }}</td>
                    <td>{{ $obra->tecnica }}</td>

@@ -13,10 +13,9 @@ class ObrasdeArteController extends Controller
      */
     public function index()
     {
-        
         $obras = DB::table('obras_de_arte')
-    ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
-    ->select('obras_de_arte.*', 'exposiciones.obra_id')
+    ->join('artistas', 'obras_de_arte.artista_id', '=', 'artistas.id')
+    ->select('obras_de_arte.*', 'artistas.nombre')
     ->get();
         return view('obras.index', ['obras'=>$obras]);
 
@@ -42,21 +41,19 @@ class ObrasdeArteController extends Controller
     public function store(Request $request)
     {
         $obra = new ObrasdeArte();
-        $obra->id = $request->code; 
-        $obra->artista_id = $request->artista_id; 
-        $obra->titulo = $request->titulo; 
-        $obra->año = $request->año; 
-        $obra->tecnica = $request->tecnica; 
-        $obra->dimensiones = $request->dimensiones; 
-        $obra->description = $request->description; 
-        $obra->save();;
+        $obra->artista_id = $request->code;
+        $obra->titulo = $request->titulo;
+        $obra->ano =$request->ano; // Extrae solo el año de la fecha
+        $obra->tecnica = $request->tecnica;
+        $obra->dimensiones = $request->dimensiones;
+        $obra->descripcion = $request->descripcion;
+        $obra->save();
 
-        $obras = DB::table('obras_de_arte')
-          ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
-          ->select('obras_de_arte.*', 'exposiciones.obra_id')
-          ->get();
-        $obras = ObrasdeArte::all();
-         return view('obras.index', ['obras_de_arte' => $obras]);
+      $obras = DB::table('obras_de_arte')
+    ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
+    ->select('obras_de_arte.*', 'exposiciones.obra_id')
+    ->get();
+        return view('obras.index', ['obras'=>$obras]);
     }
 
     /**
@@ -92,10 +89,10 @@ class ObrasdeArteController extends Controller
         }
         $obra->artista_id = $request->artista_id; 
         $obra->titulo = $request->titulo; 
-        $obra->año = $request->año; 
+        $obra->ano = $request->ano; 
         $obra->tecnica = $request->tecnica; 
         $obra->dimensiones = $request->dimensiones; 
-        $obra->description = $request->description; 
+        $obra->descripcion = $request->descripcion; 
         $obra->save();;
 
         $obras = DB::table('obras_de_arte')

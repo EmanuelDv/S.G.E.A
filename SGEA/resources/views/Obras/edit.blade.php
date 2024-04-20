@@ -39,8 +39,8 @@
             <input type="text" class="form-control" id="dimensiones" name="dimensiones" value="{{$obras->dimensiones}}">
         </div>
         <div class="mb-3">
-            <label for="description" class="form-label">description</label>
-            <input type="text" class="form-control" id="description" name="description" value="{{$obras->description}}">
+            <label for="descripcion" class="form-label">descripcion</label>
+            <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{$obras->descripcion}}">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
         <a href="{{route('obras.index')}}" class="btn btn-warning">Cancel</a>
