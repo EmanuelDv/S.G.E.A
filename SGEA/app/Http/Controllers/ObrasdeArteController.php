@@ -49,11 +49,11 @@ class ObrasdeArteController extends Controller
         $obra->descripcion = $request->descripcion;
         $obra->save();
 
-      $obras = DB::table('obras_de_arte')
-    ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
-    ->select('obras_de_arte.*', 'exposiciones.obra_id')
-    ->get();
-        return view('obras.index', ['obras'=>$obras]);
+        $obras = DB::table('obras_de_arte')
+        ->join('artistas', 'obras_de_arte.artista_id', '=', 'artistas.id')
+        ->select('obras_de_arte.*', 'artistas.nombre')
+        ->get();
+            return view('obras.index', ['obras'=>$obras]);
     }
 
     /**
@@ -96,11 +96,11 @@ class ObrasdeArteController extends Controller
         $obra->save();;
 
         $obras = DB::table('obras_de_arte')
-        ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
-        ->select('obras_de_arte.*', 'exposiciones.obra_id')
+        ->join('artistas', 'obras_de_arte.artista_id', '=', 'artistas.id')
+        ->select('obras_de_arte.*', 'artistas.nombre')
         ->get();
-      $obras = ObrasdeArte::all();
-       return view('obras.index', ['obras_de_arte' => $obras]);    }
+            return view('obras.index', ['obras'=>$obras]);
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -111,12 +111,10 @@ class ObrasdeArteController extends Controller
         $obra->delete();
 
         $obras = DB::table('obras_de_arte')
-        ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
-        ->select('obras_de_arte.*', 'exposiciones.obra_id')
+        ->join('artistas', 'obras_de_arte.artista_id', '=', 'artistas.id')
+        ->select('obras_de_arte.*', 'artistas.nombre')
         ->get();
-
-      $obras = ObrasdeArte::all();
-       return view('obras.index', ['obras_de_arte' => $obras]);    
+            return view('obras.index', ['obras'=>$obras]);
 
     }
 }
