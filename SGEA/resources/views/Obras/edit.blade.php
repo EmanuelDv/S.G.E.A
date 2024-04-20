@@ -16,11 +16,11 @@
         <div class="mb-3">
             <label for="code" class="form-label">Codigo</label>
             <input type="text" class="form-control" id="code" name="code" aria-describedby="id" disabled="disabled">
-            <div id="idHelp" class="form-text" value="{{$obras->id}}">codigo exposicion</div>
+            <div id="idHelp" class="form-text" value="{{$obras->id}}">codigo obras</div>
         </div>
         <div class="mb-3">
             <label for="artista_id" class="form-label">artista_id</label>
-            <input type="text" class="form-control" id="artista_id" name="artista_id" value="{{$obras->artista_id}}">
+            <input type="text" class="form-control" id="obras_id" name="obras_id" value="{{$obras->artista_id}}">
         </div>
         <div class="mb-3">
             <label for="titulo" class="form-label">titulo</label>
