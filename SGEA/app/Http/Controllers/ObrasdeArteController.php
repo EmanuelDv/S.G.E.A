@@ -14,11 +14,11 @@ class ObrasdeArteController extends Controller
     public function index()
     {
         
-        $obrasDeArte = DB::table('obras_de_arte')
+        $obras = DB::table('obras_de_arte')
     ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
     ->select('obras_de_arte.*', 'exposiciones.obra_id')
     ->get();
-        return view('obras.index', ['obras'=>$obrasDeArte]);
+        return view('obras.index', ['obras'=>$obras]);
 
     }
 
@@ -27,7 +27,13 @@ class ObrasdeArteController extends Controller
      */
     public function create()
     {
-        //
+        $artistas = DB::table('artistas')
+        ->orderBy('id') 
+        ->get();
+        
+        $obras = ObrasdeArte::all();
+    return view('obras.new', ['artistas' => $artistas]);
+
     }
 
     /**
@@ -35,7 +41,22 @@ class ObrasdeArteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $obra = new ObrasdeArte();
+        $obra->id = $request->code; 
+        $obra->artista_id = $request->artista_id; 
+        $obra->titulo = $request->titulo; 
+        $obra->año = $request->año; 
+        $obra->tecnica = $request->tecnica; 
+        $obra->dimensiones = $request->dimensiones; 
+        $obra->description = $request->description; 
+        $obra->save();;
+
+        $obras = DB::table('obras_de_arte')
+          ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
+          ->select('obras_de_arte.*', 'exposiciones.obra_id')
+          ->get();
+        $obras = ObrasdeArte::all();
+         return view('obras.index', ['obras_de_arte' => $obras]);
     }
 
     /**
@@ -51,7 +72,12 @@ class ObrasdeArteController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $obra = ObrasdeArte::find($id);
+        $artistas = DB::table('artistas')
+        ->orderBy('id') 
+        ->get();
+    return view('obras.edit', ['obras' => $obra,'artistas =>$artistast']);
+
     }
 
     /**
@@ -59,14 +85,41 @@ class ObrasdeArteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+        $obra = ObrasdeArte::find($id);
+
+        if ($request->code !== null) {
+            $obra->id = $request->code;
+        }
+        $obra->artista_id = $request->artista_id; 
+        $obra->titulo = $request->titulo; 
+        $obra->año = $request->año; 
+        $obra->tecnica = $request->tecnica; 
+        $obra->dimensiones = $request->dimensiones; 
+        $obra->description = $request->description; 
+        $obra->save();;
+
+        $obras = DB::table('obras_de_arte')
+        ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
+        ->select('obras_de_arte.*', 'exposiciones.obra_id')
+        ->get();
+      $obras = ObrasdeArte::all();
+       return view('obras.index', ['obras_de_arte' => $obras]);    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $obra = ObrasdeArte::find($id);
+        $obra->delete();
+
+        $obras = DB::table('obras_de_arte')
+        ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
+        ->select('obras_de_arte.*', 'exposiciones.obra_id')
+        ->get();
+
+      $obras = ObrasdeArte::all();
+       return view('obras.index', ['obras_de_arte' => $obras]);    
+
     }
 }

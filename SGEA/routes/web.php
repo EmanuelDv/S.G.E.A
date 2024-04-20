@@ -22,7 +22,7 @@ Route::delete('/exposiciones/{exposicion}', [ExposicionesController::class, 'des
 Route::put('/exposiciones/{exposicion}', [ExposicionesController::class, 'update'])->name('exposiciones.update');
 Route::get('/exposiciones/{exposicion}/edit', [ExposicionesController::class, 'edit'])->name('exposiciones.edit');
 //////////////////////
-Route::get('/obras',[ObrasdeArteController::class,'index']);
+Route::get('/obras',[ObrasdeArteController::class,'index'])->name('obras.index');;
 Route::post('/obras', [ObrasdeArteController::class, 'store'])->name('obras.store');
 Route::get('/obras/create', [ObrasdeArteController::class, 'create'])->name('obras.create');
 Route::delete('/obras/{obra}', [ObrasdeArteController::class, 'destroy'])->name('obras.destroy');

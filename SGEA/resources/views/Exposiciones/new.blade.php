@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>Add exposicion</h1>
-    <form method="POST" action="{{route('exposiciones.store')}}">
+    <form method="POST" action="{{route('obras.store')}}">
         @csrf
         <div class="mb-3">
             <label for="code" class="form-label">Codigo</label>
@@ -38,7 +38,7 @@
             <input type="text" class="form-control" id="nombre_evento" name="nombre_evento">
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
-        <a href="{{route('exposiciones.index')}}" class="btn btn-warning">Cancel</a>
+        <a href="{{route('obras.index')}}" class="btn btn-warning">Cancel</a>
     </form>
     <!-- Optional JavaScript; choose one of the two! -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
