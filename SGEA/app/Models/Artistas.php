@@ -11,4 +11,11 @@ class Artistas extends Model
     protected $table="artistas";
     protected $primaryKey="id";
     public $timestamps=false;
+
+    // protected function casts(): array {
+    //     return[
+    //         "id"=>'string'
+            
+    //     ];
+    // }
 }

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exposiciones;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ExposicionesController extends Controller
 {
@@ -11,7 +13,12 @@ class ExposicionesController extends Controller
      */
     public function index()
     {
-        //
+        $exposiciones = DB::table('exposiciones')
+        ->join('obras_de_arte', 'exposiciones.obra_id', '=', 'obras_de_arte.id')
+        ->select('exposiciones.*', 'obras_de_arte.titulo')
+        ->get();
+
+    return view('exposiciones.index', ['exposiciones' => $exposiciones]);
     }
 
     /**

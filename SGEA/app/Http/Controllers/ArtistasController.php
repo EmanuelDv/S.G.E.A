@@ -8,22 +8,23 @@ use Illuminate\Support\Facades\DB;
 
 class ArtistasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $artistas = Artistas::all();
-        return view('artistas.index', ['artistas'=>$artistas]);
+        $artistas = DB::table('artistas')
+         ->join('obras_de_arte', 'artistas.id', '=', 'obras_de_arte.id')
+         ->select('artistas.*', 'obras_de_arte.artista_id')
+         ->get();
 
+        $artistas = Artistas::all();
+        return view('artistas.index', ['artistas' => $artistas]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $exposiciones = DB::table('exposiciones')
+        ->orderBy('obra_id') 
+        ->get();
+    return view('artistas.new', ['exposiciones' => $exposiciones]);
     }
 
     /**
@@ -31,7 +32,20 @@ class ArtistasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $artista = new Artistas();
+        $artista->nombre = $request->nombre; 
+        $artista->id = $request->code; 
+        $artista->apellido = $request->apellido;
+        $artista->nacionalidad = $request->nacionalidad;
+        $artista->biografia = $request->biografia;
+        $artista->save();;
+
+        $artistas = DB::table('artistas')
+         ->join('obras_de_arte', 'artistas.id', '=', 'obras_de_arte.id')
+         ->select('artistas.*', 'obras_de_arte.artista_id')
+         ->get();
+        $artistas = Artistas::all();
+         return view('artistas.index', ['artistas' => $artistas]);
     }
 
     /**
@@ -47,7 +61,12 @@ class ArtistasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $artista = Artistas::find($id);
+        $exposiciones = DB::table('exposiciones')
+        ->orderBy('obra_id') 
+        ->get();
+    return view('artistas.edit', ['artistas' => $artista,'exposiciones =>$exposiciones']);
+
     }
 
     /**
@@ -55,7 +74,23 @@ class ArtistasController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $artista = Artistas::find($id);
+        
+        $artista->nombre = $request->nombre; 
+        if ($request->code !== null) {
+            $artista->id = $request->code;
+        } //para evitar error de nulos
+        $artista->apellido = $request->apellido;
+        $artista->nacionalidad = $request->nacionalidad;
+        $artista->biografia = $request->biografia;
+        $artista->save();;
+
+        $artistas = DB::table('artistas')
+         ->join('obras_de_arte', 'artistas.id', '=', 'obras_de_arte.id')
+         ->select('artistas.*', 'obras_de_arte.artista_id')
+         ->get();
+        $artistas = Artistas::all();
+         return view('artistas.index', ['artistas' => $artistas]);
     }
 
     /**
@@ -63,6 +98,16 @@ class ArtistasController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+         $artista = Artistas::find($id);
+         $artista->delete();
+
+          $artistas = DB::table('artistas')
+          ->join('obras_de_arte', 'artistas.id', '=', 'obras_de_arte.id')
+          ->select('artistas.*', 'obras_de_arte.artista_id')
+          ->get();
+
+          $artistas = Artistas::all();
+       return view('artistas.index', ['artistas' => $artistas]);
+
     }
 }

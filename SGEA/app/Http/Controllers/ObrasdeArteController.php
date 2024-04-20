@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ObrasdeArte;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class Obras_de_arteController extends Controller
+class ObrasdeArteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        
+        $obrasDeArte = DB::table('obras_de_arte')
+    ->join('exposiciones', 'obras_de_arte.id', '=', 'exposiciones.id')
+    ->select('obras_de_arte.*', 'exposiciones.obra_id')
+    ->get();
+        return view('obras.index', ['obras'=>$obrasDeArte]);
+
     }
 
     /**

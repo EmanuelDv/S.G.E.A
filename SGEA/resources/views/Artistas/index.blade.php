@@ -31,7 +31,18 @@
                    <td>{{ $artista->apellido }}</td>
                    <td>{{ $artista->nacionalidad }}</td>
                    <td>{{ $artista->biografia }}</td>
-                   <td><span>Action</span></td>
+                   <td>
+                    <a href="{{route('artistas.edit',['artista' => $artista->id])}}"
+                    class="btn btn-info">Edit</a>
+
+                    <form action="{{route('artistas.destroy',['artista' => $artista->id])}}"
+                    method="POST" style="display:inline-block">
+                    @method('delete')
+                    @csrf
+                     <input class="btn btn-danger" type="submit" value="Delete">
+
+                    </form>
+                   </td>
                </tr>
                @endforeach
            </tbody>
