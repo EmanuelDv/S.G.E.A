@@ -15,7 +15,7 @@ Route::delete('/artistas/{artista}', [ArtistasController::class, 'destroy'])->na
 Route::put('/artistas/{artista}', [ArtistasController::class, 'update'])->name('artistas.update');
 Route::get('/artistas/{artista}/edit', [ArtistasController::class, 'edit'])->name('artistas.edit');
 ////////////////////
-Route::get('/exposiciones',[ExposicionesController::class,'index']);
+Route::get('/exposiciones',[ExposicionesController::class,'index'])->name('exposiciones.index');
 Route::post('/exposiciones', [ExposicionesController::class, 'store'])->name('exposiciones.store');
 Route::get('/exposiciones/create', [ExposicionesController::class, 'create'])->name('exposiciones.create');
 Route::delete('/exposiciones/{exposicion}', [ExposicionesController::class, 'destroy'])->name('exposiciones.destroy');

@@ -27,13 +27,23 @@
            <tbody>
                @foreach ($exposiciones as $exposicion)
                <tr>
-                   <th scope="row">{{ $Exposicion->id }}</th>
+                   <th scope="row">{{ $exposicion->id }}</th>
                    <td>{{ $exposicion->obra_id }}</td>
                    <td>{{ $exposicion->fecha_inicio }}</td>
                    <td>{{ $exposicion->fecha_fin }}</td>
                    <td>{{ $exposicion->ubicacion }}</td>
                    <td>{{ $exposicion->nombre_evento }}</td>
-                   <td><span>Action</span></td>
+                   <td>
+                   <a href="{{route('exposiciones.edit',['exposicion' => $exposicion->id])}}"
+                    class="btn btn-info">Edit</a>
+                    <form action="{{route('exposiciones.destroy',['exposicion' => $exposicion->id])}}"
+                    method="POST" style="display:inline-block">
+                    @method('delete')
+                    @csrf
+                     <input class="btn btn-danger" type="submit" value="Delete">
+
+                    </form>
+                   </td>
                </tr>
                @endforeach
            </tbody>
