@@ -41,7 +41,7 @@
                    <a href="{{route('obras.edit',['obra' => $obra->id])}}"
                     class="btn btn-info">Edit</a>
 
-                    <form action="{{route('obra.destroy',['obra' => $obra->id])}}"
+                    <form action="{{route('obras.destroy',['obras' => $obra->id])}}"
                     method="POST" style="display:inline-block">
                     @method('delete')
                     @csrf

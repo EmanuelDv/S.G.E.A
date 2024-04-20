@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>Edit Obra de Arte</h1>
-    <form method="POST" action="{{route('obras.update',['obras_de_arte'=>$obras->id])}}">
+    <form method="POST" action="{{route('obras.update',['obra'=>$obras->id])}}">
         @method('put')
         @csrf
         <div class="mb-3">
